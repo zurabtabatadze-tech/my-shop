@@ -1,0 +1,62 @@
+<div class="home-wrapper">
+  <aside class="filter-sidebar">
+    <div class="filter-header">
+      <h3>ფილტრები</h3>
+      <button class="reset-btn" (click)="resetFilters()">გასუფთავება</button>
+    </div>
+
+    <div class="filter-section">
+      <h4>ძებნა</h4>
+      <div class="search-box">
+        <input type="text" placeholder="მოძებნე მოდელი..." [(ngModel)]="searchQuery" (input)="applyFilters()">
+        <i>🔍</i>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <h4>კატეგორიები</h4>
+      <ul class="category-list">
+        <li [class.active]="selectedCategory === ''" (click)="selectCategory('')">ყველა პროდუქტი</li>
+        <li *ngFor="let cat of categories" [class.active]="selectedCategory === cat._id" (click)="selectCategory(cat._id)">{{ cat.name }}</li>
+      </ul>
+    </div>
+
+    <div class="filter-section">
+      <h4>ბრენდი</h4>
+      <select class="custom-select" [(ngModel)]="selectedBrand" (change)="applyFilters()">
+        <option value="">ყველა ბრენდი</option>
+        <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+      </select>
+    </div>
+
+    <div class="filter-section">
+      <h4>მინ. შეფასება: <span>⭐ {{ minRating }}</span></h4>
+      <input type="range" class="custom-slider" min="0" max="5" step="0.5" [(ngModel)]="minRating" (input)="applyFilters()">
+    </div>
+
+    <div class="filter-section">
+      <h4>მაქს. ფასი: <span>{{ maxPrice }} ₾</span></h4>
+      <input type="range" class="custom-slider" min="0" max="5000" step="50" [(ngModel)]="maxPrice" (input)="applyFilters()">
+      <div class="range-labels">
+        <span>0 ₾</span><span>5000 ₾</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="products-container">
+    <div class="grid-layout">
+      <app-product-card *ngFor="let item of filteredProducts" [product]="item"></app-product-card>
+    </div>
+    
+    <div *ngIf="filteredProducts.length === 0" class="no-products">
+      <div class="sad-icon">🔍😕</div>
+      სამწუხაროდ, პროდუქტები ვერ მოიძებნა.
+    </div>
+
+    <div class="pagination-container" *ngIf="products.length > 0">
+      <button class="page-btn" (click)="prevPage()" [disabled]="currentPage === 1">წინა</button>
+      <span class="page-info">გვერდი {{ currentPage }}</span>
+      <button class="page-btn" (click)="nextPage()" [disabled]="!hasMoreProducts">შემდეგი</button>
+    </div>
+  </main>
+</div>

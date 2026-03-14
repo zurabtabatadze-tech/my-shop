@@ -1,0 +1,46 @@
+<div class="details-wrapper" *ngIf="product; else loading">
+  <div class="product-main">
+    <div class="image-box">
+      <img [src]="product.thumbnail" [alt]="product.title">
+    </div>
+    
+    <div class="info-box">
+      <h1>{{ product.title }}</h1>
+      <p class="brand-tag">ბრენდი: <strong>{{ product.brand }}</strong></p>
+      <div class="price-row">
+        <span class="main-price">{{ product.price.current }} ₾</span>
+        <span class="stock-status">საწყობშია: {{ product.stock }} ცალი</span>
+      </div>
+      <p class="summary">{{ product.description }}</p>
+      
+      <button class="buy-button">🛒 კალათაში დამატება</button>
+    </div>
+  </div>
+
+  <div class="tabs-container">
+    <div class="tab-header">
+      <button [class.active]="activeTab === 'details'" (click)="switchTab('details')">აღწერა</button>
+      <button [class.active]="activeTab === 'reviews'" (click)="switchTab('reviews')">შეფასებები</button>
+    </div>
+
+    <div class="tab-body">
+      <div *ngIf="activeTab === 'details'">
+        <h3>პროდუქტის მახასიათებლები</h3>
+        <ul class="specs">
+          <li><strong>კატეგორია:</strong> {{ product.category.name }}</li>
+          <li><strong>რეიტინგი:</strong> ⭐ {{ product.rating }}</li>
+        </ul>
+        <p>{{ product.description }}</p>
+      </div>
+      
+      <div *ngIf="activeTab === 'reviews'">
+        <h3>მომხმარებელთა აზრი</h3>
+        <p>ამ პროდუქტზე შეფასებები ჯერ არ არის.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loader">პროდუქტი იტვირთება...</div>
+</ng-template>

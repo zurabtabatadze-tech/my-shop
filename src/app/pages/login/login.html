@@ -1,0 +1,35 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>სისტემაში შესვლა</h2>
+      <p>მოგესალმებით ხელახლა! 👋</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-box">
+      ⚠️ {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="auth-form">
+      
+      <div class="input-group">
+        <label>ელ-ფოსტა</label>
+        <input type="email" name="email" [(ngModel)]="credentials.email" required placeholder="example@mail.com">
+      </div>
+
+      <div class="input-group">
+        <label>პაროლი</label>
+        <input type="password" name="password" [(ngModel)]="credentials.password" required placeholder="თქვენი პაროლი">
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="!loginForm.valid || isLoading">
+        <span *ngIf="!isLoading">შესვლა</span>
+        <span *ngIf="isLoading" class="loader-text">იტვირთება... ⏳</span>
+      </button>
+
+    </form>
+
+    <div class="auth-footer">
+      არ გაქვთ ანგარიში? <a routerLink="/signup">რეგისტრაცია</a>
+    </div>
+  </div>
+</div>

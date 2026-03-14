@@ -1,0 +1,82 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>შექმენი ანგარიში</h2>
+      <p>შეავსეთ ყველა ველი რეგისტრაციისთვის 🚀</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-box">
+      ⚠️ {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="onRegister()" #signupForm="ngForm" class="auth-form">
+      
+      <div class="form-row">
+        <div class="input-group">
+          <label>სახელი *</label>
+          <input type="text" name="firstName" [(ngModel)]="user.firstName" required placeholder="მაგ. გიორგი">
+        </div>
+        <div class="input-group">
+          <label>გვარი *</label>
+          <input type="text" name="lastName" [(ngModel)]="user.lastName" required placeholder="მაგ. გიორგაძე">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>ელ-ფოსტა *</label>
+        <input type="email" name="email" [(ngModel)]="user.email" required placeholder="example@mail.com">
+      </div>
+
+      <div class="input-group">
+        <label>პაროლი *</label>
+        <input type="password" name="password" [(ngModel)]="user.password" required minlength="6" placeholder="დიდი ასო, ციფრი, მინ. 6 სიმბოლო">
+      </div>
+
+      <div class="form-row">
+        <div class="input-group">
+          <label>ასაკი *</label>
+          <input type="number" name="age" [(ngModel)]="user.age" required placeholder="მაგ. 20" min="10" max="100">
+        </div>
+        <div class="input-group">
+          <label>სქესი *</label>
+          <select name="gender" [(ngModel)]="user.gender" required class="custom-select">
+            <option value="MALE">მამრობითი</option>
+            <option value="FEMALE">მდედრობითი</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-group">
+          <label>საფოსტო ინდექსი *</label>
+          <input type="text" name="zipcode" [(ngModel)]="user.zipcode" required placeholder="მაგ. 0100">
+        </div>
+        <div class="input-group">
+          <label>სურათის ლინკი (URL)</label>
+          <input type="text" name="avatar" [(ngModel)]="user.avatar" placeholder="Avatar URL">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-group">
+          <label>ტელეფონი</label>
+          <input type="text" name="phone" [(ngModel)]="user.phone" placeholder="მაგ. 555907680">
+        </div>
+        <div class="input-group">
+          <label>მისამართი</label>
+          <input type="text" name="address" [(ngModel)]="user.address" placeholder="თქვენი მისამართი">
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="!signupForm.valid || isLoading">
+        <span *ngIf="!isLoading">რეგისტრაცია</span>
+        <span *ngIf="isLoading" class="loader-text">იტვირთება... ⏳</span>
+      </button>
+
+    </form>
+
+    <div class="auth-footer">
+      უკვე გაქვთ ანგარიში? <a routerLink="/login">შესვლა</a>
+    </div>
+  </div>
+</div>

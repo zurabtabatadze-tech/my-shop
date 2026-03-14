@@ -1,0 +1,42 @@
+<div class="profile-container">
+  
+  <div *ngIf="isLoading" class="loading-state">
+    იტვირთება მონაცემები... ⏳
+  </div>
+
+  <div *ngIf="errorMessage" class="error-box">
+    ⚠️ {{ errorMessage }}
+  </div>
+
+  <div *ngIf="userData && !isLoading" class="profile-card">
+    <div class="profile-header">
+      <img [src]="userData.avatar" alt="Avatar" class="avatar">
+      <h2>{{ userData.firstName }} {{ userData.lastName }}</h2>
+      <p class="role">აქტიური მომხმარებელი</p>
+    </div>
+
+    <div class="profile-info">
+      <div class="info-group">
+        <span class="label">📧 ელ-ფოსტა:</span>
+        <span class="value">{{ userData.email }}</span>
+      </div>
+      <div class="info-group">
+        <span class="label">📞 ტელეფონი:</span>
+        <span class="value">{{ userData.phone || 'არ არის მითითებული' }}</span>
+      </div>
+      <div class="info-group">
+        <span class="label">📍 მისამართი:</span>
+        <span class="value">{{ userData.address || 'არ არის მითითებული' }}</span>
+      </div>
+      <div class="info-group">
+        <span class="label">🎂 ასაკი:</span>
+        <span class="value">{{ userData.age }} წელი</span>
+      </div>
+      <div class="info-group">
+        <span class="label">🚻 სქესი:</span>
+        <span class="value">{{ userData.gender === 'MALE' ? 'მამრობითი' : 'მდედრობითი' }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>

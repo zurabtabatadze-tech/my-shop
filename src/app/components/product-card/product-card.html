@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="image-container" [routerLink]="['/product', product._id]">
+    <img [src]="product.thumbnail" [alt]="product.title">
+  </div>
+  
+  <div class="card-content">
+    <h3 class="title" [routerLink]="['/product', product._id]">{{ product.title }}</h3>
+    <div class="brand">{{ product.brand }}</div>
+    
+    <div class="price-rating">
+      <span class="price">{{ product.price.current }} ₾</span>
+      <span class="rating">⭐ {{ product.rating }}</span>
+    </div>
+    
+    <button class="add-to-cart" (click)="addToCart()">🛒 კალათაში</button>
+  </div>
+</div>

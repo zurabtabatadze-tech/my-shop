@@ -1,0 +1,46 @@
+.details-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; font-family: sans-serif; box-sizing: border-box; }
+.details-content { display: flex; gap: 40px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.image-section { flex: 1; text-align: center; }
+.main-image { max-width: 100%; height: auto; max-height: 400px; object-fit: contain; }
+.info-section { flex: 1; display: flex; flex-direction: column; gap: 15px; justify-content: center; }
+.info-section h1 { font-size: 28px; color: #2c3e50; margin: 0; }
+.brand { color: #7f8c8d; font-size: 16px; font-weight: bold; }
+.price-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.price { font-size: 32px; color: #27ae60; font-weight: 900; margin: 0; }
+.stock { background: #f1f2f6; padding: 8px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; color: #2c3e50; }
+.description { color: #555; line-height: 1.6; font-size: 16px; }
+.add-to-cart-btn { background: #3498db; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; width: fit-content; }
+.add-to-cart-btn:hover { background: #2980b9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
+
+.tabs-section { margin-top: 40px; background: white; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); overflow: hidden; }
+.tabs-header { display: flex; border-bottom: 2px solid #eee; }
+.tab-btn { flex: 1; padding: 20px; border: none; background: none; font-size: 18px; font-weight: bold; color: #7f8c8d; cursor: pointer; transition: 0.3s; }
+.tab-btn.active { color: #3498db; border-bottom: 3px solid #3498db; }
+.tab-content { padding: 30px; color: #2c3e50; line-height: 1.8; font-size: 15px; }
+.loading { text-align: center; font-size: 24px; margin-top: 50px; color: #3498db; }
+
+/* --- მობილურის ვერსია პროდუქტის დეტალებისთვის --- */
+@media (max-width: 768px) {
+  /* კონტეინერების გასწორება */
+  .details-container { padding: 10px !important; margin: 15px auto !important; }
+  .details-content { flex-direction: column !important; gap: 20px !important; padding: 20px !important; }
+  
+  /* ტექსტების და ღილაკების მორგება */
+  .info-section h1 { font-size: 22px !important; }
+  .price { font-size: 26px !important; }
+  .price-row { gap: 10px !important; }
+  .add-to-cart-btn { width: 100% !important; padding: 15px !important; } /* ღილაკი იწელება მთელ სიგანეზე მარტივად დასაჭერად */
+  
+  /* აღწერის ტაბების გასწორება */
+  .tabs-section { margin-top: 20px !important; width: 100% !important; }
+  .tab-btn { padding: 15px 10px !important; font-size: 15px !important; }
+  .tab-content { padding: 20px 15px !important; }
+  
+  /* ვიცავთ ტექსტს მოჭრისგან (ეკრანიდან გასვლისგან) */
+  * { box-sizing: border-box !important; }
+  .tab-content p, .tab-content div, .info-section { 
+    overflow-wrap: break-word !important; 
+    word-wrap: break-word !important; 
+    max-width: 100% !important; 
+  }
+}
