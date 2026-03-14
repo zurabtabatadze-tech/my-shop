@@ -90,14 +90,24 @@
   background: #2980b9;
   transform: scale(1.02);
 }
-/* --- მობილურის ვერსია ბარათებისთვის --- */
+/* --- 100% მუშა მობილურის ვერსია ბარათებისთვის --- */
 @media (max-width: 768px) {
   :host {
     display: block !important;
     width: 100% !important;
-    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important; /* გარეთ გასულ ნაწილს უბრალოდ გააქრობს */
   }
+  
   * {
-    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    word-wrap: break-word !important; /* გრძელ ტექსტებს ძალით გადაიტანს ახალ ხაზზე */
+  }
+
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
   }
 }
