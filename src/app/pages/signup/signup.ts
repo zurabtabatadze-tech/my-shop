@@ -33,10 +33,7 @@ export class Signup {
   onRegister() {
     this.isLoading = true;
     this.errorMessage = '';
-
-    // ვაკეთებთ ტელეფონის ფორმატირებას
     let formattedPhone = this.user.phone.trim();
-    // თუ ნომერი წერია და არ იწყება +995-ით, ჩვენ თვითონ ვუმატებთ წინ
     if (formattedPhone && !formattedPhone.startsWith('+995')) {
       formattedPhone = '+995' + formattedPhone;
     }
@@ -44,7 +41,7 @@ export class Signup {
     const payload = {
       ...this.user,
       age: Number(this.user.age),
-      phone: formattedPhone // აქ უკვე გამზადებული +995... იგზავნება
+      phone: formattedPhone 
     };
 
     this.api.registerUser(payload).subscribe({
@@ -55,8 +52,6 @@ export class Signup {
       },
       error: (err) => {
         this.isLoading = false;
-        
-        // ერორების ამოკითხვა
         if (err.error && err.error.errorKeys && err.error.errorKeys.length > 0) {
           this.errorMessage = 'შეცდომა: ' + err.error.errorKeys.join(', ');
         } else if (err.error && err.error.message) {

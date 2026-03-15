@@ -1,17 +1,19 @@
-<div class="card">
-  <div class="image-container" [routerLink]="['/product', product._id]">
-    <img [src]="product.thumbnail" [alt]="product.title">
+<div class="product-card" [routerLink]="['/product', product.id || product._id]">
+  <div class="image-wrapper">
+    <img [src]="product.thumbnail || (product.images ? product.images[0] : '')" alt="Product">
   </div>
   
-  <div class="card-content">
-    <h3 class="title" [routerLink]="['/product', product._id]">{{ product.title }}</h3>
-    <div class="brand">{{ product.brand }}</div>
+  <div class="card-info">
+    <h3>{{ product.title }}</h3>
+    <p class="brand">{{ product.brand }}</p>
     
-    <div class="price-rating">
-      <span class="price">{{ product.price.current }} ₾</span>
+    <div class="price-row">
+      <span class="price">{{ product.price?.current || product.price?.amount || product.price?.value || product.price }} ₾</span>
       <span class="rating">⭐ {{ product.rating }}</span>
     </div>
     
-    <button class="add-to-cart" (click)="addToCart()">🛒 კალათაში</button>
+    <button class="add-to-cart-btn" (click)="addToCart(product, $event)">
+      🛒 კალათაში
+    </button>
   </div>
 </div>

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './profile.html',
   styleUrl: './profile.css'
 })
-export class Profile implements OnInit { // <-- აი, აქ დავარქვით ზუსტად Profile
+export class Profile implements OnInit { 
   userData: any = null;
   isLoading: boolean = false;
   errorMessage: string = '';

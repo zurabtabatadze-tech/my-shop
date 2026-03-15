@@ -1,39 +1,27 @@
-<nav class="navbar">
-  <div class="nav-container">
-    
-    <a routerLink="/" class="logo">
-      <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="logo" class="logo-icon">
-      <span>MyShop</span>
-    </a>
-
-    <div class="search-bar">
-      <input 
-        type="text" 
-        placeholder="მოძებნე პროდუქტი..." 
-        [(ngModel)]="searchQuery" 
-        (keyup.enter)="onSearch()">
-      <i class="search-icon" style="cursor: pointer;" (click)="onSearch()">🔍</i>
-    </div>
-
-    <div class="nav-actions">
-      <a routerLink="/cart" class="cart-btn">
-        🛒 <span class="badge">{{ cartCount }}</span>
-      </a>
-
-      <ng-container *ngIf="!isLoggedIn">
-        <a routerLink="/login" class="login-btn">შესვლა</a>
-        <a routerLink="/signup" class="signup-btn">რეგისტრაცია</a>
-      </ng-container>
-
-      <ng-container *ngIf="isLoggedIn">
-        <a routerLink="/profile" class="profile-btn">
-          <img *ngIf="userData?.avatar" [src]="userData.avatar" alt="avatar" class="nav-avatar">
-          <span *ngIf="!userData?.avatar">👤</span>
-          <span>{{ userData?.firstName || 'პროფილი' }}</span>
-        </a>
-        <button (click)="onLogout()" class="logout-btn">გასვლა</button>
-      </ng-container>
-    </div>
-
+<header class="navbar-container">
+  <div class="logo" routerLink="/">
+    <h2>🛒 MyShop</h2>
   </div>
-</nav>
+
+  <div class="search-bar">
+    <input type="text" placeholder="მოძებნე პროდუქტი...">
+    <button class="search-btn">🔍</button>
+  </div>
+
+  <div class="right-menu">
+    <div class="cart-icon" routerLink="/cart">
+      <span class="cart-emoji">🛒</span>
+      <span class="badge">{{ totalItem }}</span> 
+    </div>
+
+    <ng-container *ngIf="!isLoggedIn">
+      <button class="login-btn" routerLink="/login">შესვლა</button>
+      <button class="register-btn" routerLink="/signup">რეგისტრაცია</button>
+    </ng-container>
+
+    <ng-container *ngIf="isLoggedIn">
+      <button class="login-btn" routerLink="/profile">👤 პროფაილი</button>
+      <button class="register-btn logout-btn" (click)="logout()">გასვლა</button>
+    </ng-container>
+  </div>
+</header>

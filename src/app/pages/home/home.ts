@@ -50,7 +50,6 @@ export class Home implements OnInit {
   loadProducts(catId: string = '') {
     this.api.getAllProducts(catId, this.currentPage).subscribe((res: any) => {
       this.products = res.products;
-      // აქაც შევცვალეთ: თუ 50 პროდუქტი მოვიდა, ესეიგი შემდეგი გვერდიც არსებობს
       this.hasMoreProducts = this.products.length === 50; 
       this.brands = [...new Set(this.products.map(p => p.brand).filter(b => b))];
       this.applyFilters();

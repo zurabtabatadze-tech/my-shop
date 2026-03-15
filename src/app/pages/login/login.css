@@ -15,7 +15,6 @@
 .auth-footer { text-align: center; margin-top: 30px; color: #7f8c8d; font-size: 14px; }
 .auth-footer a { color: #3498db; font-weight: bold; text-decoration: none; margin-left: 5px; }
 .auth-footer a:hover { text-decoration: underline; }
-/* --- მობილურის ვერსია ავტორიზაციისთვის --- */
 @media (max-width: 600px) {
   .login-container, .signup-container { padding: 20px 15px; }
   .login-box, .signup-box { width: 100%; padding: 30px 20px; box-sizing: border-box; }

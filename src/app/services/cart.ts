@@ -1,51 +1,52 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private cart = new BehaviorSubject<any[]>(this.loadCart());
+  public cartItemList: any[] = [];
+  public productList = new BehaviorSubject<any[]>([]); 
 
-  getCart() { return this.cart.asObservable(); }
+  constructor() { }
+
+  getCart(): Observable<any[]> {
+    return this.productList.asObservable();
+  }
 
   addToCart(product: any) {
-    const currentCart = this.cart.value;
-    const item = currentCart.find(i => i.id === product.id);
-    if (item) {
-      item.quantity += 1;
+    const existingProduct = this.cartItemList.find(item => 
+      (item.id && item.id === product.id) || 
+      (item.title && item.title === product.title)
+    );
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
     } else {
-      currentCart.push({ ...product, quantity: 1 });
+      const productToAdd = { ...product, quantity: 1 };
+      this.cartItemList.push(productToAdd);
     }
-    this.updateCart(currentCart);
+    this.productList.next(this.cartItemList);
   }
 
-  removeFromCart(productId: string) {
-    const currentCart = this.cart.value.filter(i => i.id !== productId);
-    this.updateCart(currentCart);
-  }
-
-  updateQuantity(productId: string, quantity: number) {
-    const currentCart = this.cart.value;
-    const item = currentCart.find(i => i.id === productId);
+  updateQuantity(id: any, quantity: number) {
+    const item = this.cartItemList.find(p => p.id === id || p.title === id);
     if (item) {
       item.quantity = quantity;
-      this.updateCart(currentCart);
+      if (item.quantity <= 0) {
+        this.removeFromCart(item.id || item.title);
+      }
     }
+    this.productList.next(this.cartItemList);
   }
 
-  // ახალი: კალათის სრულად გასუფთავება
+  removeFromCart(id: any) {
+    this.cartItemList = this.cartItemList.filter(item => item.id !== id && item.title !== id);
+    this.productList.next(this.cartItemList);
+  }
+
   clearCart() {
-    this.updateCart([]);
-  }
-
-  private updateCart(cart: any[]) {
-    localStorage.setItem('cart', JSON.stringify(cart));
-    this.cart.next(cart);
-  }
-
-  private loadCart(): any[] {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
+    this.cartItemList = [];
+    this.productList.next(this.cartItemList);
   }
 }

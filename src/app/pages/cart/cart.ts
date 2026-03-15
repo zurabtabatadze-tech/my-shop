@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart';
-import { RouterLink, Router } from '@angular/router'; // დაემატა Router
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -41,12 +41,11 @@ export class Cart implements OnInit {
     }
   }
 
-  // ახალი: ყიდვის ფუნქცია
   checkout() {
     if (this.cartItems.length > 0) {
       alert('🎉 გილოცავთ! თქვენი შენაძენი წარმატებით დასრულდა. მადლობა რომ ირჩევთ MyShop-ს!');
-      this.cartService.clearCart(); // ვასუფთავებთ კალათას
-      this.router.navigate(['/']); // ვაგდებთ მთავარ გვერდზე
+      this.cartService.clearCart(); 
+      this.router.navigate(['/']); 
     }
   }
 }

@@ -22,7 +22,6 @@
   .form-row { flex-direction: column; gap: 20px; }
   .auth-card { padding: 30px 20px; }
 }
-/* --- მობილურის ვერსია ავტორიზაციისთვის --- */
 @media (max-width: 600px) {
   .login-container, .signup-container { padding: 20px 15px; }
   .login-box, .signup-box { width: 100%; padding: 30px 20px; box-sizing: border-box; }

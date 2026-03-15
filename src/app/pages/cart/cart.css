@@ -19,7 +19,6 @@
 .checkout-btn { width: 100%; padding: 15px; background: #27ae60; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
 .checkout-btn:hover { background: #219a52; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4); }
 
-/* --- 100% მომუშავე მობილურის ვერსია --- */
 @media (max-width: 768px) {
   .cart-container { padding: 15px !important; margin: 10px auto !important; }
   .cart-content { display: flex !important; flex-direction: column !important; gap: 20px !important; }

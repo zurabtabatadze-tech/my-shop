@@ -1,45 +1,31 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { Api } from '../../services/api';
-import { AuthService } from '../../services/auth';
+import { Router, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms'; 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, RouterModule, FormsModule], 
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
 export class Login {
-  credentials = {
-    email: '',
-    password: ''
-  };
-
-  errorMessage: string = '';
+  credentials = { email: '', password: '' };
   isLoading: boolean = false;
+  errorMessage: string = '';
 
-  constructor(private api: Api, private router: Router, private authService: AuthService) {}
+  constructor(private router: Router) {}
 
   onLogin() {
-    this.isLoading = true;
-    this.errorMessage = '';
+    this.isLoading = true; 
 
-    this.api.loginUser(this.credentials).subscribe({
-      next: (res: any) => {
-        this.isLoading = false;
-        // აქ ვიყენებთ ახალ სერვისს!
-        this.authService.login(res.access_token);
-        
-        alert('🎉 სისტემაში წარმატებით შეხვედით!');
-        this.router.navigate(['/']); // გადავდივართ მთავარ გვერდზე
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.errorMessage = err.error?.message || 'არასწორი ელ-ფოსტა ან პაროლი.';
-      }
-    });
+    setTimeout(() => {
+      localStorage.setItem('user', this.credentials.email);
+      localStorage.setItem('token', 'demo-token-123');
+
+      this.isLoading = false;
+      this.router.navigate(['/']);
+    }, 500);
   }
 }
